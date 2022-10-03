@@ -1,0 +1,40 @@
+.wrapper {
+  background-color: #000;
+  color: #fff;
+
+  .inner {
+    max-width: 1040px;
+    margin: auto;
+    padding-bottom: 50px;
+    border-top: 2px solid #ccc;
+  }
+}
+
+.inner {
+  .text-app {
+    padding-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    .text-ccc a {
+      color: #ccc;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .padding-40px {
+      padding-right: 40px;
+    }
+
+    .inta-twit img {
+      width: 24px;
+      height: 24px;
+      margin-left: 16px;
+      cursor: pointer;
+    }
+    .ch-apple img {
+      margin-left: 6px;
+      cursor: pointer;
+      width: 120px;
+      height: 36px;
+    }
+  }
+}

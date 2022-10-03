@@ -1,0 +1,103 @@
+.wrapper {
+  background-color: #000;
+  padding: 60px;
+  .inner {
+    height: 100%;
+    padding-bottom: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+  }
+}
+
+.rules {
+  margin: 40px 40px 0;
+  font-size: 14px;
+  color: #bbb;
+  text-align: center;
+}
+.h2-logo {
+  color: #fff;
+  font-size: 40px;
+  margin-top: 36px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+.p-logo {
+  color: #ccc;
+  font-size: 16px;
+  margin-bottom: 40px;
+  align-items: center;
+}
+.form {
+  width: 350px;
+  background-color: rgba($color: #fff, $alpha: 0.285);
+  backdrop-filter: blur(6px);
+  content: "";
+  inset: 0.01%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .form-register {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 50px;
+    .input-register {
+      border: none;
+      border-bottom: 2px solid #ccc;
+      background-color: transparent;
+      color: #fff;
+      height: 40px;
+      width: 250px;
+      margin-top: 20px;
+      padding-left: 5px;
+      padding-top: 8px;
+      font-size: 16px;
+    }
+
+    #submit {
+      background-color: rgba($color: red, $alpha: 0.7);
+      color: #fff;
+      height: 40px;
+      width: 250px;
+      margin-top: 40px;
+      font-size: 16px;
+    }
+  }
+  .or {
+    margin-top: 30px;
+    color: #fff;
+    font-size: 16px;
+  }
+
+  .icon-insta {
+    height: 25px;
+    width: 25px;
+  }
+}
+.login {
+  width: 350px;
+  height: 60px;
+  background-color: rgba($color: #fff, $alpha: 0.285);
+  backdrop-filter: blur(6px);
+  content: "";
+  inset: 0.01%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+  .color-white {
+    color: #fff;
+  }
+  .btn-login {
+    height: 30px;
+    padding: 5px 20px;
+  }
+}
