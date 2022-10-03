@@ -40,7 +40,7 @@ function LogIn() {
     })
       .then((res) => {
         localStorage.removeItem("USER");
-        localStorage.setItem("USER", JSON.stringify(res.data));
+        localStorage.setItem("USER", JSON.stringify(res?.data));
         return navigate("/");
       })
       .catch((err) => {

@@ -32,8 +32,8 @@ function Register() {
   const handlerSbumitRegister = () => {
     postData("user", user)
       .then((res) => {
-        localStorage.setItem("USER", JSON.stringify(res.data));
-        console.log(res.data);
+        localStorage.setItem("USER", JSON.stringify(res?.data));
+        console.log(res?.data);
 
         return navigate("/");
       })
