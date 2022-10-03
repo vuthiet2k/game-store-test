@@ -22,6 +22,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import { Stack } from "@mui/system";
 
 function Home() {
   if (!localStorage.getItem("USER")) {
@@ -85,12 +86,10 @@ function Home() {
           justifyContent: "space-between",
         }}
       >
-        <Box mt={"44px"}>
+        <Stack ml={"44px"} sx={{ width: "630px" }}>
           <Box
-            ml={"44px"}
             sx={{
-              maxWidth: "630px",
-              padding: "22px 35px 55px 50px",
+              padding: "22px 35px 50px 50px",
               borderRadius: "30px",
               backdropFilter: "blur(8px)",
               backgroundColor: "rgba(250,250,250, 0.285)",
@@ -103,6 +102,7 @@ function Home() {
                 fontSize: "90px",
                 whiteSpace: "nowrap",
                 fontWeight: "700",
+                letterSpacing: "0",
               }}
             >
               Game Store
@@ -126,7 +126,6 @@ function Home() {
             </Typography>
           </Box>
           <Box
-            ml={"44px"}
             mt={"20px"}
             sx={{
               maxWidth: "630px",
@@ -139,43 +138,26 @@ function Home() {
             }}
           >
             <ButtonRoute>
-              <Button sx={{ textTransform: "none", gap: "12px" }}>
-                <Icon alt="icon" src={iconBodyBrowse} />
-                <H3Text>Browse</H3Text>
-              </Button>
+              <Icon alt="icon" src={iconBodyBrowse} />
+              <H3Text>Browse</H3Text>
             </ButtonRoute>
             <ButtonRoute>
-              <Button sx={{ textTransform: "none", gap: "12px" }}>
-                <Icon alt="icon" src={iconBodyPlayDice} />
-                <H3Text>Play Dice</H3Text>
-              </Button>
+              <Icon alt="icon" src={iconBodyPlayDice} />
+              <H3Text>Play Dice</H3Text>
             </ButtonRoute>
-            <ButtonRoute>
-              <Button
-                href="https://github.com/gianlucajahn/react-ecommerce-store"
-                sx={{ textTransform: "none", gap: "12px" }}
-              >
-                <Icon alt="icon" src={iconBodyGithub} />
-                <H3Text>Github</H3Text>
-              </Button>
+            <ButtonRoute href="https://github.com/gianlucajahn/react-ecommerce-store">
+              <Icon alt="icon" src={iconBodyGithub} />
+              <H3Text>Github</H3Text>
             </ButtonRoute>
-            <ButtonRoute>
-              <Button
-                href="https://www.linkedin.com/in/gianlucajahn/"
-                sx={{ textTransform: "none", gap: "12px" }}
-              >
-                <Icon alt="icon" src={iconBodyLinkedLn} />
-                <H3Text>Linkedln</H3Text>
-              </Button>
+            <ButtonRoute href="https://www.linkedin.com/in/gianlucajahn/">
+              <Icon alt="icon" src={iconBodyLinkedLn} />
+              <H3Text>Linkedln</H3Text>
             </ButtonRoute>
           </Box>
-        </Box>
-
+        </Stack>
         <Box
-          mt={"44px"}
           mr={"40px"}
           sx={{
-            height: "400px",
             maxWidth: "280px",
             padding: "22px 30px 30px",
             borderRadius: "30px",
@@ -201,62 +183,36 @@ function Home() {
             Quick Navigation
           </Typography>
           <ButtonSideBar>
-            <Button sx={{ textTransform: "none", gap: "15px" }}>
-              <Icon alt="icon" src={iconSidebarGame} />
-              <H3Text>Game Page</H3Text>
-            </Button>
+            <Icon alt="icon" src={iconSidebarGame} />
+            <H3Text>Game Page</H3Text>
           </ButtonSideBar>
-          <ButtonSideBar>
-            <Link to={"/404"} style={{ textDecoration: "none" }}>
-              <Button sx={{ textTransform: "none", gap: "15px" }}>
-                <Icon alt="icon" src={iconSidebarEroPage} />
-                <H3Text>404 Page</H3Text>
-              </Button>
-            </Link>
+          <Link to={"/404"} style={{ textDecoration: "none" }}>
+            <ButtonSideBar>
+              <Icon alt="icon" src={iconSidebarEroPage} />
+              <H3Text>404 Page</H3Text>
+            </ButtonSideBar>
+          </Link>
+          <Link to={"/query"} style={{ textDecoration: "none" }}>
+            <ButtonSideBar>
+              <Icon alt="icon" src={iconSidebarEroQuery} />
+              <H3Text>404 Query</H3Text>
+            </ButtonSideBar>
+          </Link>
+          <ButtonSideBar href="https://github.com/vuthiet2k/game-store#readme">
+            <Icon alt="icon" src={iconSidebarCommit} />
+            <H3Text>Commit Log</H3Text>
           </ButtonSideBar>
-          <ButtonSideBar>
-            <Link to={"/query"} style={{ textDecoration: "none" }}>
-              <Button sx={{ textTransform: "none", gap: "15px" }}>
-                <Icon alt="icon" src={iconSidebarEroQuery} />
-                <H3Text>404 Query</H3Text>
-              </Button>
-            </Link>
+          <ButtonSideBar href="https://github.com/vuthiet2k/game-store#readme">
+            <Icon alt="icon" src={iconSidebarPerfor} />
+            <H3Text>Performance</H3Text>
           </ButtonSideBar>
-          <ButtonSideBar>
-            <Button
-              href="https://github.com/vuthiet2k/game-store#readme"
-              sx={{ textTransform: "none", gap: "15px" }}
-            >
-              <Icon alt="icon" src={iconSidebarCommit} />
-              <H3Text>Commit Log</H3Text>
-            </Button>
+          <ButtonSideBar href="https://github.com/vuthiet2k/game-store#readme">
+            <Icon alt="icon" src={iconSidebarTechnologies} />
+            <H3Text>Technologies</H3Text>
           </ButtonSideBar>
-          <ButtonSideBar>
-            <Button
-              href="https://github.com/vuthiet2k/game-store#readme"
-              sx={{ textTransform: "none", gap: "15px" }}
-            >
-              <Icon alt="icon" src={iconSidebarPerfor} />
-              <H3Text>Performance</H3Text>
-            </Button>
-          </ButtonSideBar>
-          <ButtonSideBar>
-            <Button
-              href="https://github.com/vuthiet2k/game-store#readme"
-              sx={{ textTransform: "none", gap: "15px" }}
-            >
-              <Icon alt="icon" src={iconSidebarTechnologies} />
-              <H3Text>Technologies</H3Text>
-            </Button>
-          </ButtonSideBar>
-          <ButtonSideBar>
-            <Button
-              href="https://github.com/vuthiet2k/game-store"
-              sx={{ textTransform: "none", gap: "15px" }}
-            >
-              <Icon alt="icon" src={iconSidebarOurSouce} />
-              <H3Text>OurSouce</H3Text>
-            </Button>
+          <ButtonSideBar href="https://github.com/vuthiet2k/game-store">
+            <Icon alt="icon" src={iconSidebarOurSouce} />
+            <H3Text>OurSouce</H3Text>
           </ButtonSideBar>
         </Box>
       </Box>
@@ -282,18 +238,21 @@ const Icon = styled("img")({
 
 const H3Text = styled("h3")({
   color: "#000",
-  fontSize: "18px",
+  fontSize: "16px",
   whiteSpace: "nowrap",
+  fontFamily: "system-ui",
+  fontWeight: "500",
 });
 
-const ButtonRoute = styled("button")({
-  width: "135px",
+const ButtonRoute = styled(Button)({
+  textTransform: "none",
+  gap: "12px",
+  width: "143px",
   height: "40px",
   backgroundColor: "#fff",
   border: "1px transparent",
   borderRadius: "18px",
   color: "#000",
-  cursor: "pointer",
   display: "flex",
   alignItems: "center",
   fontSize: "16px",
@@ -304,7 +263,7 @@ const ButtonRoute = styled("button")({
   },
 });
 
-const ButtonSideBar = styled("button")({
+const ButtonSideBar = styled(Button)({
   width: "215px",
   height: "40px",
   backgroundColor: "#fff",
@@ -313,10 +272,13 @@ const ButtonSideBar = styled("button")({
   color: "#000",
   cursor: "pointer",
   display: "flex",
+  justifyContent: "left",
   alignItems: "center",
   fontSize: "16px",
-  padding: "10px 28px",
+  paddingLeft: "48px",
   transition: "all .3s",
+  textTransform: "none",
+  gap: "15px",
   "&:hover": {
     background: "#45c1bc",
   },
