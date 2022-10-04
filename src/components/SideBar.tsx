@@ -112,8 +112,8 @@ function SideBar() {
           >
             <IconFiltersWishlist
               style={{
-                width: "39px",
-                height: "43px",
+                width: "28px",
+                height: "32px",
                 border: "1px transparent",
                 borderRadius: "8px",
                 padding: "6px 5px 4px",
@@ -133,8 +133,8 @@ function SideBar() {
           >
             <IconFiltersRating
               style={{
-                width: "39px",
-                height: "43px",
+                width: "28px",
+                height: "32px",
                 border: "1px transparent",
                 borderRadius: "8px",
                 padding: "6px 5px 4px",
@@ -153,8 +153,8 @@ function SideBar() {
           >
             <IconFiltersReviews
               style={{
-                width: "39px",
-                height: "43px",
+                width: "28px",
+                height: "32px",
                 border: "1px transparent",
                 borderRadius: "8px",
                 padding: "6px 5px 4px",
@@ -178,8 +178,8 @@ function SideBar() {
           >
             <IconGenresAction
               style={{
-                width: "39px",
-                height: "43px",
+                width: "28px",
+                height: "32px",
                 border: "1px transparent",
                 borderRadius: "8px",
                 padding: "6px 5px 4px",
@@ -199,8 +199,8 @@ function SideBar() {
           >
             <IconGenresStrategy
               style={{
-                width: "39px",
-                height: "43px",
+                width: "28px",
+                height: "32px",
                 border: "1px transparent",
                 borderRadius: "8px",
                 padding: "6px 5px 4px",
@@ -220,8 +220,8 @@ function SideBar() {
           >
             <IconGenresRPG
               style={{
-                width: "39px",
-                height: "43px",
+                width: "28px",
+                height: "32px",
                 border: "1px transparent",
                 borderRadius: "8px",
                 padding: "6px 5px 4px",
@@ -241,8 +241,8 @@ function SideBar() {
           >
             <IconGenresShooter
               style={{
-                width: "39px",
-                height: "43px",
+                width: "28px",
+                height: "32px",
                 border: "1px transparent",
                 borderRadius: "8px",
                 padding: "6px 5px 4px",
@@ -262,8 +262,8 @@ function SideBar() {
           >
             <IconGenresAdventure
               style={{
-                width: "39px",
-                height: "43px",
+                width: "28px",
+                height: "32px",
                 border: "1px transparent",
                 borderRadius: "8px",
                 padding: "6px 5px 4px",
@@ -283,8 +283,8 @@ function SideBar() {
           >
             <IconGenresPuzzle
               style={{
-                width: "39px",
-                height: "43px",
+                width: "28px",
+                height: "32px",
                 border: "1px transparent",
                 borderRadius: "8px",
                 padding: "6px 5px 4px",
@@ -304,8 +304,8 @@ function SideBar() {
           >
             <IconGenresRacing
               style={{
-                width: "39px",
-                height: "43px",
+                width: "28px",
+                height: "32px",
                 border: "1px transparent",
                 borderRadius: "8px",
                 padding: "6px 5px 4px",
@@ -325,8 +325,8 @@ function SideBar() {
           >
             <IconGenresSport
               style={{
-                width: "39px",
-                height: "43px",
+                width: "28px",
+                height: "32px",
                 border: "1px transparent",
                 borderRadius: "8px",
                 padding: "6px 5px 4px",
@@ -345,6 +345,8 @@ function SideBar() {
 
 const ButtonSideBar = styled("div")({
   width: "270px",
+  height: "32px",
+  marginBottom: "10px",
   paddingTop: "10px",
   background: "#000",
   cursor: "pointer",
@@ -374,10 +376,11 @@ const H3Title = styled("h3")({
 });
 
 const H3Text = styled("h3")({
-  fontSize: "20px",
-  cursor: "pointer",
+  fontSize: "18px",
   color: "#fff",
   whiteSpace: "nowrap",
+  fontFamily: "system-ui",
+  fontWeight: "500",
 });
 
 export default React.memo(SideBar);
