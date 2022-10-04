@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Box } from "@mui/system";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AppBar, Button, styled, Toolbar } from "@mui/material";
 
 import UserCart from "./UserCart";
@@ -12,14 +12,17 @@ import React from "react";
 
 function Header() {
   let user = JSON.parse(localStorage.getItem("USER") || "");
+  let navigate = useNavigate();
   const { setDataUI } = useContext(ProductContext);
   const [search, setSearch] = useState("");
   const handlerChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
   const handlerClickSearch = () => {
+    setSearch("");
     getData(`products?name=${search}`).then((res) => {
       setDataUI(res?.data);
+      navigate("/store");
     });
   };
 
@@ -28,7 +31,10 @@ function Header() {
       <Toolbar sx={{ justifyContent: "space-between" }}>
         <Box sx={{ gap: "30px" }}>
           <Link to="/" style={{ textDecoration: "none" }}>
-            <Button sx={{ textTransform: "none", color: "#fff", gap: "18px" }}>
+            <Button
+              disableRipple
+              sx={{ textTransform: "none", color: "#fff", gap: "18px" }}
+            >
               <IconRoute alt="icon" src={iconHeadHome} />
               <H3Route>Game Store</H3Route>
             </Button>

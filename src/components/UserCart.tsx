@@ -10,18 +10,22 @@ import React from "react";
 function UserCart() {
   const { cart } = useContext(CartContext);
   let user = JSON.parse(localStorage.getItem("USER") || "");
-  
+
   return (
     <Box>
-      <Link to="/log-in" style={{textDecoration: 'none'}}>
-        <Button sx={{ textTransform: "none", color: "#fff", gap: "16px" }}>
+      <Link to="/log-in" style={{ textDecoration: "none" }}>
+        <Button
+          disableRipple
+          sx={{ textTransform: "none", color: "#fff", gap: "16px" }}
+        >
           <IconRoute alt="icon" src={iconHeadUser} />
-          <H3Route>{user? user.account : ''}</H3Route>
+          <H3Route>{user ? user.account : ""}</H3Route>
         </Button>
       </Link>
 
-      <Link to="/cart" style={{textDecoration: 'none'}}>
+      <Link to="/cart" style={{ textDecoration: "none" }}>
         <Button
+          disableRipple
           sx={{
             textTransform: "none",
             color: "#fff",

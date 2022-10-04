@@ -16,73 +16,83 @@ import { ProductContext } from "../context/ProductContext";
 function SideBar() {
   const { setDataUI, setFilter, allData } = React.useContext(ProductContext);
   const handlerWishList = () => {
-    setDataUI(allData.filter((item) => {
-      return (
-        item.wishlist == true
-      )}));
+    setDataUI(
+      allData.filter((item) => {
+        return item.wishlist == true;
+      })
+    );
     setFilter("Wishlist");
   };
   const handlerRatting = () => {
-    setDataUI(allData.filter((item) => {
-      return (
-        item.ratting === true
-      )}));
+    setDataUI(
+      allData.filter((item) => {
+        return item.ratting === true;
+      })
+    );
     setFilter("Ratting");
   };
   const handlerAction = () => {
-    setDataUI(allData.filter((item) => {
-      return (
-        item.action === true
-      )}));
+    setDataUI(
+      allData.filter((item) => {
+        return item.action === true;
+      })
+    );
     setFilter("Action");
   };
   const handlerStrategy = () => {
-    setDataUI(allData.filter((item) => {
-      return (
-        item.strategy === true
-      )}));
+    setDataUI(
+      allData.filter((item) => {
+        return item.strategy === true;
+      })
+    );
     setFilter("Strategy");
   };
   const handlerAdventure = () => {
-    setDataUI(allData.filter((item) => {
-      return (
-        item.adventure === true
-      )}));
+    setDataUI(
+      allData.filter((item) => {
+        return item.adventure === true;
+      })
+    );
     setFilter("Adventure");
   };
   const handlerPuzzle = () => {
-    setDataUI(allData.filter((item) => {
-      return (
-        item.puzzle === true
-      )}));
+    setDataUI(
+      allData.filter((item) => {
+        return item.puzzle === true;
+      })
+    );
     setFilter("Puzzle");
   };
   const handlerShooter = () => {
-    setDataUI(allData.filter((item) => {
-      return (
-        item.shooter === true
-      )}));
+    setDataUI(
+      allData.filter((item) => {
+        return item.shooter === true;
+      })
+    );
     setFilter("Shooter");
   };
   const handlerRPG = () => {
-    setDataUI(allData.filter((item) => {
-      return (
-        item.rpg === true
-      )}));
+    setDataUI(
+      allData.filter((item) => {
+        return item.rpg === true;
+      })
+    );
     setFilter("RPG");
   };
   const handlerSport = () => {
-    setDataUI(allData.filter((item) => {
-      return (
-        item.sport === true
-      )}));
+    setDataUI(
+      allData.filter((item) => {
+        return item.sport === true;
+      })
+    );
     setFilter("Sport");
   };
   const handlerRacing = () => {
-    setDataUI(allData.filter((item) => {
-      return (
-        item.racing === true
-      )}));
+    setDataUI(
+      allData.filter((item) => {
+        return item.racing === true;
+      })
+    );
     setFilter("Racing");
   };
 
@@ -92,7 +102,12 @@ function SideBar() {
         <H3Title>Filters</H3Title>
         <ButtonSideBar>
           <Button
-            sx={{ textTransform: "none", gap: "15px", p: "0" }}
+            sx={{
+              textTransform: "none",
+              gap: "15px",
+              p: "0",
+            }}
+            disableRipple
             onClick={handlerWishList}
           >
             <IconFiltersWishlist
@@ -113,6 +128,7 @@ function SideBar() {
         <ButtonSideBar>
           <Button
             sx={{ textTransform: "none", gap: "15px", p: "0" }}
+            disableRipple
             onClick={handlerRatting}
           >
             <IconFiltersRating
@@ -131,7 +147,10 @@ function SideBar() {
           </Button>
         </ButtonSideBar>
         <ButtonSideBar>
-          <Button sx={{ textTransform: "none", gap: "15px", p: "0" }}>
+          <Button
+            disableRipple
+            sx={{ textTransform: "none", gap: "15px", p: "0" }}
+          >
             <IconFiltersReviews
               style={{
                 width: "39px",
@@ -154,6 +173,7 @@ function SideBar() {
         <ButtonSideBar>
           <Button
             sx={{ textTransform: "none", gap: "15px", p: "0" }}
+            disableRipple
             onClick={handlerAction}
           >
             <IconGenresAction
@@ -174,6 +194,7 @@ function SideBar() {
         <ButtonSideBar>
           <Button
             sx={{ textTransform: "none", gap: "15px", p: "0" }}
+            disableRipple
             onClick={handlerStrategy}
           >
             <IconGenresStrategy
@@ -194,6 +215,7 @@ function SideBar() {
         <ButtonSideBar>
           <Button
             sx={{ textTransform: "none", gap: "15px", p: "0" }}
+            disableRipple
             onClick={handlerRPG}
           >
             <IconGenresRPG
@@ -214,6 +236,7 @@ function SideBar() {
         <ButtonSideBar>
           <Button
             sx={{ textTransform: "none", gap: "15px", p: "0" }}
+            disableRipple
             onClick={handlerShooter}
           >
             <IconGenresShooter
@@ -234,6 +257,7 @@ function SideBar() {
         <ButtonSideBar>
           <Button
             sx={{ textTransform: "none", gap: "15px", p: "0" }}
+            disableRipple
             onClick={handlerAdventure}
           >
             <IconGenresAdventure
@@ -254,6 +278,7 @@ function SideBar() {
         <ButtonSideBar>
           <Button
             sx={{ textTransform: "none", gap: "15px", p: "0" }}
+            disableRipple
             onClick={handlerPuzzle}
           >
             <IconGenresPuzzle
@@ -274,6 +299,7 @@ function SideBar() {
         <ButtonSideBar>
           <Button
             sx={{ textTransform: "none", gap: "15px", p: "0" }}
+            disableRipple
             onClick={handlerRacing}
           >
             <IconGenresRacing
@@ -294,6 +320,7 @@ function SideBar() {
         <ButtonSideBar>
           <Button
             sx={{ textTransform: "none", gap: "15px", p: "0" }}
+            disableRipple
             onClick={handlerSport}
           >
             <IconGenresSport

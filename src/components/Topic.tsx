@@ -7,10 +7,10 @@ import { CartContext } from "../context/CartContext";
 import { ProductContext } from "../context/ProductContext";
 
 export const Topic = () => {
-  let now = performance.now();
-  while (performance.now() - now < 800) {
-    // Artificial delay -- do nothing for 100ms
-  }
+  // let now = performance.now();
+  // while (performance.now() - now < 800) {
+  //   // Artificial delay -- do nothing for 100ms
+  // }
   const [layout, setLayout] = useState<number>(3);
   const { allData, setDataUI, dataUI, filter, setFilter } =
     useContext(ProductContext);
