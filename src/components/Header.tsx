@@ -29,7 +29,7 @@ function Header() {
   return (
     <AppBar sx={{ backgroundColor: "#000" }}>
       <Toolbar sx={{ justifyContent: "space-between" }}>
-        <Box sx={{ gap: "30px" }}>
+        <Box sx={{ gap: "100px", display: 'flex', alignItems: 'center' }}>
           <Link to="/" style={{ textDecoration: "none" }}>
             <Button
               disableRipple
@@ -39,24 +39,19 @@ function Header() {
               <H3Route>Game Store</H3Route>
             </Button>
           </Link>
+
+          <Box sx={{ height: "35px" }}>
+            <InputSearch
+              placeholder="Search games..."
+              value={search}
+              onChange={(e) => handlerChangeSearch(e)}
+            />
+            <Button type="submit" onClick={handlerClickSearch}>
+              <IconRoute src={SearchHead} alt="icon" />
+            </Button>
+          </Box>
         </Box>
-        {user ? (
-          <>
-            <Box sx={{ height: "35px" }}>
-              <InputSearch
-                placeholder="Search games..."
-                value={search}
-                onChange={(e) => handlerChangeSearch(e)}
-              />
-              <Button type="submit" onClick={handlerClickSearch}>
-                <IconRoute src={SearchHead} alt="icon" />
-              </Button>
-            </Box>
-            <UserCart />
-          </>
-        ) : (
-          ""
-        )}
+        {user ? <UserCart /> : ""}
       </Toolbar>
     </AppBar>
   );
