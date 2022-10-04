@@ -14,8 +14,6 @@ import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import { postData, putData } from "../apis";
 import { ProductContext } from "../context/ProductContext";
-import { TurnedInNot } from "@mui/icons-material";
-import { preview } from "vite";
 
 const Product = ({ id, to, src, name, money, love }: ProductType) => {
   const [isLove, setIsLove] = useState<boolean>(love);
