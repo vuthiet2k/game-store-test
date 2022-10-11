@@ -18,7 +18,7 @@ function SideBar() {
   const handlerWishList = () => {
     setDataUI(
       allData.filter((item) => {
-        return item.wishlist == true;
+        return item.isLiked === true;
       })
     );
     setFilter("Wishlist");
@@ -26,7 +26,7 @@ function SideBar() {
   const handlerRatting = () => {
     setDataUI(
       allData.filter((item) => {
-        return item.ratting === true;
+        return item.rating >= 90;
       })
     );
     setFilter("Ratting");
@@ -34,7 +34,7 @@ function SideBar() {
   const handlerAction = () => {
     setDataUI(
       allData.filter((item) => {
-        return item.action === true;
+        return item.genre === "Action";
       })
     );
     setFilter("Action");
@@ -42,7 +42,7 @@ function SideBar() {
   const handlerStrategy = () => {
     setDataUI(
       allData.filter((item) => {
-        return item.strategy === true;
+        return item.genre === "Strategy";
       })
     );
     setFilter("Strategy");
@@ -50,7 +50,7 @@ function SideBar() {
   const handlerAdventure = () => {
     setDataUI(
       allData.filter((item) => {
-        return item.adventure === true;
+        return item.genre === "Adventure";
       })
     );
     setFilter("Adventure");
@@ -58,7 +58,7 @@ function SideBar() {
   const handlerPuzzle = () => {
     setDataUI(
       allData.filter((item) => {
-        return item.puzzle === true;
+        return item.genre === "Puzzle";
       })
     );
     setFilter("Puzzle");
@@ -66,7 +66,7 @@ function SideBar() {
   const handlerShooter = () => {
     setDataUI(
       allData.filter((item) => {
-        return item.shooter === true;
+        return item.genre === "Shooter";
       })
     );
     setFilter("Shooter");
@@ -74,7 +74,7 @@ function SideBar() {
   const handlerRPG = () => {
     setDataUI(
       allData.filter((item) => {
-        return item.rpg === true;
+        return item.genre === "RPG";
       })
     );
     setFilter("RPG");
@@ -82,7 +82,7 @@ function SideBar() {
   const handlerSport = () => {
     setDataUI(
       allData.filter((item) => {
-        return item.sport === true;
+        return item.genre === "Sport";
       })
     );
     setFilter("Sport");
@@ -90,7 +90,7 @@ function SideBar() {
   const handlerRacing = () => {
     setDataUI(
       allData.filter((item) => {
-        return item.racing === true;
+        return item.genre === "Racing";
       })
     );
     setFilter("Racing");

@@ -3,24 +3,21 @@ import { useContext, useState } from "react";
 import Product from "./Product";
 import { ReactComponent as Layout4 } from "../assets/icon/layoutTopic.svg";
 import { ReactComponent as Layout1 } from "../assets/icon/layoutTopic1.svg";
-import { CartContext } from "../context/CartContext";
 import { ProductContext } from "../context/ProductContext";
+import { CartContext } from "../context/CartContext";
 
 export const Topic = () => {
-  // let now = performance.now();
-  // while (performance.now() - now < 800) {
-  //   // Artificial delay -- do nothing for 100ms
-  // }
+  const { cart } = useContext(CartContext);
   const [layout, setLayout] = useState<number>(3);
   const { allData, setDataUI, dataUI, filter, setFilter } =
     useContext(ProductContext);
   const handlerClearFilter = () => {
     setDataUI(allData);
-    setFilter("none");
+    setFilter("None");
   };
 
   return (
-    <Box pb={"280px"} pr={"60px"} sx={{ display: "block", flex: "1" }}>
+    <Box pb={"280px"} sx={{ display: "block", flex: "1" }}>
       <Box>
         <Typography
           variant="h1"
@@ -30,6 +27,7 @@ export const Topic = () => {
             letterSpacing: "1px",
             fontWeight: "700",
             mb: "10px",
+            fontFamily: "system-ui",
           }}
         >
           Trending and interesting
@@ -39,7 +37,7 @@ export const Topic = () => {
           sx={{
             color: "#fff",
             fontSize: "16px",
-            letterSpacing: "1px",
+            fontFamily: "system-ui",
           }}
         >
           Based on player counts and ratings
@@ -57,8 +55,8 @@ export const Topic = () => {
       >
         <Box>
           <Button
+            disabled
             sx={{
-              color: "#fff",
               textTransform: "none",
               backgroundColor: "#262626",
               border: "1px transparent",
@@ -66,10 +64,18 @@ export const Topic = () => {
               transition: "all 0.3s",
               height: "40px",
               padding: "8px 22px",
-              fontSize: "14px",
             }}
           >
-            Filter by:
+            <Typography
+              paragraph
+              sx={{
+                color: "#fff",
+                fontSize: "14px",
+                display: "contents",
+              }}
+            >
+              Filter by:&nbsp;
+            </Typography>
             <Typography
               paragraph
               sx={{
@@ -92,9 +98,12 @@ export const Topic = () => {
               borderRadius: "12px",
               transition: "all 0.3s",
               height: "40px",
+              fontWeight: "700",
               padding: "8px 22px",
               fontSize: "14px",
-              fontWeight: "700",
+              "&: active": {
+                transform: "scale(0.9)",
+              },
             }}
             onClick={handlerClearFilter}
           >
@@ -112,25 +121,53 @@ export const Topic = () => {
           >
             Display options:
           </Typography>
-          <Button onClick={() => setLayout(3)}>
+          <Button
+            disableRipple
+            sx={{
+              height: "48px",
+              backgroundColor: "#282828",
+              fill: layout === 3 ? "#fff" : "rgb(111, 111, 111)",
+              border: "1px transparent",
+              borderRadius: "8px",
+              m: "0 5px",
+              "&: active": {
+                transform: "scale(0.9)",
+              },
+            }}
+            onClick={() => setLayout(3)}
+          >
             <Layout4
               style={{
                 width: "48px",
                 height: "48px",
                 cursor: "pointer",
                 transition: "all .2s",
-                fill: "#fff",
+                // fill: "#fff",
               }}
             />
           </Button>
-          <Button onClick={() => setLayout(8)}>
+          <Button
+            disableRipple
+            sx={{
+              height: "48px",
+              backgroundColor: "#282828",
+              fill: layout === 8 ? "#fff" : "rgb(111, 111, 111)",
+              border: "1px transparent",
+              borderRadius: "8px",
+              m: "0 5px",
+              "&: active": {
+                transform: "scale(0.9)",
+              },
+            }}
+            onClick={() => setLayout(8)}
+          >
             <Layout1
               style={{
                 width: "48px",
                 height: "48px",
                 cursor: "pointer",
                 transition: "all .2s",
-                fill: "#fff",
+                // fill: "#fff",
               }}
             />
           </Button>
@@ -143,35 +180,57 @@ export const Topic = () => {
           sx={{
             display: "flex",
             alignItems: "center",
-            justifyContent: "center",
+            justifyContent: layout === 3 ? "left" : "center",
             color: "#fff",
           }}
         >
-          {dataUI && dataUI.length > 0
-            ? dataUI.map((product, index) => {
-                return (
-                  <Grid
-                    item={true}
-                    xs={layout}
-                    key={index}
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Product
-                      id={product.id}
-                      to={`/store/${product.id}`}
-                      name={product.name}
-                      src={product.avatar}
-                      money={product.price}
-                      love={product.wishlist}
-                    />
-                  </Grid>
-                );
-              })
-            : "Không có dữ liệu"}
+          {dataUI && dataUI.length > 0 ? (
+            dataUI.map((product, index) => {
+              return (
+                <Grid
+                  item={true}
+                  xs={layout}
+                  key={index}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Product
+                    id={product.id}
+                    to={`/store/${product.id}`}
+                    name={product.name}
+                    src={product.cover}
+                    money={product.price}
+                    love={product.isLiked}
+                    isadded={
+                      cart.find((item) => {
+                        return item.id === product.id;
+                      })
+                        ? true
+                        : false
+                    }
+                  />
+                </Grid>
+              );
+            })
+          ) : (
+            <Typography
+              paragraph
+              sx={{
+                mt: "50px",
+                ml: "15px",
+                color: "#fff",
+                fontSize: "30px",
+                letterSpacing: "1px",
+                fontWeight: "800",
+                fontFamily: "system-ui",
+              }}
+            >
+              Không có dữ liệu
+            </Typography>
+          )}
         </Grid>
       </Box>
     </Box>

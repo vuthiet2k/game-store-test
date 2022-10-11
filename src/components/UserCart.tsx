@@ -4,39 +4,40 @@ import iconHeadCart from "../assets/icon/headcart.svg";
 import { Box, Button, styled } from "@mui/material";
 import { CartContext } from "../context/CartContext";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
-import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function UserCart() {
   const { cart } = useContext(CartContext);
+  let navigate = useNavigate();
   let user = JSON.parse(localStorage.getItem("USER") || "");
 
   return (
-    <Box>
-      <Link to="/log-in" style={{ textDecoration: "none" }}>
-        <Button
-          disableRipple
-          sx={{ textTransform: "none", color: "#fff", gap: "16px" }}
-        >
-          <IconRoute alt="icon" src={iconHeadUser} />
-          <H3Route>{user ? user.account : ""}</H3Route>
-        </Button>
-      </Link>
-
-      <Link to="/cart" style={{ textDecoration: "none" }}>
-        <Button
-          disableRipple
-          sx={{
-            textTransform: "none",
-            color: "#fff",
-            gap: "16px",
-            marginLeft: "30px",
-          }}
-        >
-          <IconRoute alt="icon" src={iconHeadCart} />
-          <H3Route>{cart.length}</H3Route>
-        </Button>
-      </Link>
+    <Box sx={{ display: { xs: "none", md: "block" } }}>
+      <Button
+        disableRipple
+        sx={{ textTransform: "none", color: "#fff", gap: "16px" }}
+        onClick={() => {
+          navigate("/log-in");
+        }}
+      >
+        <IconRoute alt="icon" src={iconHeadUser} />
+        <H3Route>{user ? user.account : ""}</H3Route>
+      </Button>
+      <Button
+        disableRipple
+        sx={{
+          textTransform: "none",
+          color: "#fff",
+          gap: "16px",
+          marginLeft: "30px",
+        }}
+        onClick={() => {
+          navigate("/cart");
+        }}
+      >
+        <IconRoute alt="icon" src={iconHeadCart} />
+        <H3Route>Cart: {cart.length}</H3Route>
+      </Button>
     </Box>
   );
 }
@@ -52,4 +53,4 @@ const H3Route = styled("h3")({
   whiteSpace: "nowrap",
 });
 
-export default React.memo(UserCart);
+export default UserCart;

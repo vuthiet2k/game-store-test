@@ -21,10 +21,12 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Stack } from "@mui/system";
+import { motion } from "framer-motion";
 
 function Home() {
+  let navigate = useNavigate();
   if (!localStorage.getItem("USER")) {
     localStorage.setItem("USER", JSON.stringify(""));
   }
@@ -46,20 +48,41 @@ function Home() {
           <source type="video/mp4" src={bgHome} />
         </video>
       </Box>
-
-      <AppBar sx={{ backgroundColor: "transparent", boxShadow: "none" }}>
-        <Toolbar sx={{ justifyContent: "space-between" }}>
-          <Box sx={{ gap: "30px" }}>
-            <Link to="/404" style={{ textDecoration: "none" }}>
+      <motion.div
+        animate="visible"
+        initial={"hidden"}
+        variants={{
+          hidden: { opacity: 1, y: 15 },
+          visible: { opacity: 1, y: 0 },
+        }}
+        transition={{ y: { type: "spring" }, duration: 0.01}}
+      >
+        <AppBar
+          sx={{
+            backgroundColor: "transparent",
+            boxShadow: "none",
+            height: "62px",
+          }}
+        >
+          <Toolbar sx={{ justifyContent: "space-between" }}>
+            <Box sx={{ gap: "30px" }}>
               <Button
                 disableRipple
-                sx={{ textTransform: "none", color: "#fff", gap: "18px" }}
+                sx={{
+                  textTransform: "none",
+                  color: "#fff",
+                  gap: "18px",
+                  "&: active": {
+                    transform: "scale(0.9)",
+                  },
+                }}
+                onClick={() => {
+                  navigate("/404");
+                }}
               >
                 <IconRoute alt="icon" src={iconHeadHome} />
                 <H3Route>Game Store</H3Route>
               </Button>
-            </Link>
-            <Link to="/store" style={{ textDecoration: "none" }}>
               <Button
                 disableRipple
                 sx={{
@@ -67,17 +90,23 @@ function Home() {
                   color: "#fff",
                   gap: "18px",
                   marginLeft: "50px",
+                  display: { xs: "none", md: "inline-flex" },
+                  "&: active": {
+                    transform: "scale(0.9)",
+                  },
+                }}
+                onClick={() => {
+                  navigate("/store");
                 }}
               >
                 <IconRoute alt="icon" src={iconHeadStore} />
                 <H3Route>Browse Store</H3Route>
               </Button>
-            </Link>
-          </Box>
-          {user ? <UserCart /> : <></>}
-        </Toolbar>
-      </AppBar>
-
+            </Box>
+            {user ? <UserCart /> : <></>}
+          </Toolbar>
+        </AppBar>
+      </motion.div>
       <Box
         sx={{
           height: 1,
@@ -88,7 +117,7 @@ function Home() {
           justifyContent: "space-between",
         }}
       >
-        <Stack ml={"44px"} sx={{ width: "630px" }}>
+        <Stack sx={{ width: { sm: "630px", xs: "100%" }, ml: { sm: "44px" } }}>
           <Box
             sx={{
               padding: "22px 35px 50px 50px",
@@ -101,7 +130,7 @@ function Home() {
               variant="h1"
               sx={{
                 color: "#fff",
-                fontSize: "90px",
+                fontSize: { xs: "45px", sm: "90px" },
                 whiteSpace: "nowrap",
                 fontWeight: "700",
                 letterSpacing: "0",
@@ -109,7 +138,10 @@ function Home() {
             >
               Game Store
             </Typography>
-            <Typography variant="h4" sx={{ color: "#fff", fontSize: "19px" }}>
+            <Typography
+              variant="h4"
+              sx={{ color: "#fff", fontSize: { xs: "14px", sm: "19px" } }}
+            >
               The best destination to buy new games to competitive prices. 24
               hour support, "best price" guarantee and a flawless UX. Wish for
               more? Tell us below — or check out our&nbsp;
@@ -119,7 +151,7 @@ function Home() {
                 sx={{
                   color: "#45c1bc",
                   cursor: "pointer",
-                  fontSize: "19px",
+                  fontSize: { xs: "14px", sm: "19px" },
                   display: "inline-block",
                 }}
               >
@@ -137,27 +169,40 @@ function Home() {
               backgroundColor: "rgba(250,250,250, 0.285)",
               display: "flex",
               justifyContent: "space-between",
+              gap: "2px",
             }}
           >
-            <Link to="/store" style={{ textDecoration: "none" }}>
-              <ButtonRoute>
-                <Icon alt="icon" src={iconBodyBrowse} />
-                <H3Text>Browse</H3Text>
-              </ButtonRoute>
-            </Link>
-            <Link to="/store/1" style={{ textDecoration: "none" }}>
-              <ButtonRoute>
-                <Icon alt="icon" src={iconBodyPlayDice} />
-                <H3Text>Play Dice</H3Text>
-              </ButtonRoute>
-            </Link>
-            <ButtonRoute href="https://github.com/vuthiet2k/game-store-test">
-              <Icon alt="icon" src={iconBodyGithub} />
-              <H3Text>Github</H3Text>
+            <ButtonRoute
+              onClick={() => {
+                navigate("/store");
+              }}
+            >
+              <Icon alt="icon" src={iconBodyBrowse} />
+              <H3Text sx={{ display: { xs: "none", sm: "inline-block" } }}>
+                Browse
+              </H3Text>
             </ButtonRoute>
-            <ButtonRoute href="https://www.linkedin.com/in/gianlucajahn/">
+            <ButtonRoute
+              onClick={() => {
+                navigate("/store/1");
+              }}
+            >
+              <Icon alt="icon" src={iconBodyPlayDice} />
+              <H3Text sx={{ display: { xs: "none", sm: "inline-block" } }}>
+                Play Dice
+              </H3Text>
+            </ButtonRoute>
+            <ButtonRoute href="https://github.com/vuthiet2k/game-store">
+              <Icon alt="icon" src={iconBodyGithub} />
+              <H3Text sx={{ display: { xs: "none", sm: "inline-block" } }}>
+                Github
+              </H3Text>
+            </ButtonRoute>
+            <ButtonRoute href="https://www.linkedin.com/">
               <Icon alt="icon" src={iconBodyLinkedLn} />
-              <H3Text>Linkedln</H3Text>
+              <H3Text sx={{ display: { xs: "none", sm: "inline-block" } }}>
+                Linkedln
+              </H3Text>
             </ButtonRoute>
           </Box>
         </Stack>
@@ -169,7 +214,7 @@ function Home() {
             borderRadius: "30px",
             backdropFilter: "blur(8px)",
             backgroundColor: "rgba(250,250,250, 0.285)",
-            display: "flex",
+            display: { xs: "none", md: "flex" },
             flexDirection: "column",
             justifyContent: "center",
             gap: "5px",

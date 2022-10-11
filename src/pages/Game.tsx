@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   CardActions,
   CardContent,
   Collapse,
@@ -129,41 +128,12 @@ function Game() {
               </SwiperSlide>
             </Swiper>
           </Box>
-          <Box
-            sx={{
-              width: "440px",
-              padding: "30px 70px 30px 34px",
-              backgroundColor: "#1a1a1a",
-              border: "1px transparent",
-              borderTopLeftRadius: "16px",
-              borderTopRightRadius: "16px",
-              height: "280px",
-              overflow: "auto",
-            }}
-          >
-            <CardContent sx={{}}>
-              <Typography
-                variant="h2"
-                sx={{
-                  color: "#fff",
-                  fontFamily: "fantasy",
-                  fontSize: "26px",
-                  marginBottom: "16px",
-                  letterSpacing: "2px",
-                }}
-              >
+          <Box sx={{ width: "440px", padding: "30px 70px 30px 34px" }}>
+            <CardContent>
+              <Typography variant="h2" color="#fff">
                 About
               </Typography>
-              <Typography
-                paragraph
-                sx={{
-                  color: "#ccc",
-                  fontFamily: "sans-serif",
-                  fontSize: "15px",
-                  lineHeight: "24px",
-                  wordSpacing: "2px",
-                }}
-              >
+              <Typography paragraph color="#fff">
                 {product?.about}
               </Typography>
             </CardContent>
