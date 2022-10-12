@@ -10,38 +10,41 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { ProductType } from "../@type/cart";
+import { ProductType as ProductTypeCart } from "../@type/cart";
+import { ProductType } from "../@type/product";
 import { memo, useContext, useEffect, useState } from "react";
-import { CartContext } from "../context/CartContext";
-import { ProductContext } from "../context/ProductContext";
-import toast, { Toaster } from "react-hot-toast";
+import { CartContext, handlerAddCart } from "../context/CartContext";
+import { handlerLove, ProductContext } from "../context/ProductContext";
+import { Toaster } from "react-hot-toast";
 
-const Product = ({ id, to, src, name, money, love, isadded }: ProductType) => {
-  const [isLove, setIsLove] = useState<boolean>(love);
+const Product = ({
+  id,
+  to,
+  src,
+  name,
+  money,
+  love,
+  isadded,
+}: ProductTypeCart) => {
+  // const [isLove, setIsLove] = useState<boolean>(love);
+  // const [added, setAdded] = useState<boolean>(isadded);
   const { cart, setCart } = useContext(CartContext);
-  const [added, setAdded] = useState<boolean>(isadded);
   const { allData, setAllData } = useContext(ProductContext);
-  const handlerAddCart = () => {
-    setAdded(true);
-    setCart([{ id: id, name: name, money: money }, ...cart]);
-    toast.success("Thêm sản phẩm thành công!");
+  const [product, setProduct] = useState<ProductType>(allData[id]);
+  const handlerAddCartProduct = () => {
+    setProduct({ ...product, inCart: true });
+    handlerAddCart(id, allData, setAllData, cart, setCart);
   };
-  const handlerLove = () => {
-    setIsLove(!isLove);
-    let elements = [...allData];
-    elements = elements.map((item) =>
-      item.id === id ? { ...item, isLiked: !isLove} : item
-    );
-    setAllData(elements);
+  const handlerLoveProduct = () => {
+    setProduct({ ...product, isLiked: !product.isLiked });
+    handlerLove(id, allData, setAllData);
   };
-
-  useEffect(() => {
-    setIsLove(love);
-  }, [love]);
-  useEffect(() => {
-    setAdded(isadded);
-  }, [isadded]);
-
+  // useEffect(() => {
+  //   setIsLove(love);
+  // }, [love]);
+  // useEffect(() => {
+  //   setAdded(isadded);
+  // }, [isadded]);
   return (
     <>
       <Toaster position="top-right" reverseOrder={false} />
@@ -79,7 +82,7 @@ const Product = ({ id, to, src, name, money, love, isadded }: ProductType) => {
               color: "#90ee90",
               fontSize: "14px ",
               fontWeight: "700",
-              display: added ? "block" : "none",
+              display: product.inCart ? "block" : "none",
             }}
           >
             Added
@@ -96,9 +99,9 @@ const Product = ({ id, to, src, name, money, love, isadded }: ProductType) => {
               fontSize: "14px ",
               textTransform: "none",
               fontWeight: "700",
-              display: added ? "none" : "block",
+              display: product.inCart ? "none" : "block",
             }}
-            onClick={handlerAddCart}
+            onClick={handlerAddCartProduct}
           >
             Add to cart
             <img
@@ -126,13 +129,13 @@ const Product = ({ id, to, src, name, money, love, isadded }: ProductType) => {
           >
             {name}
           </Link>
-          <Button onClick={handlerLove}>
+          <Button onClick={handlerLoveProduct}>
             <IconAddLove
               style={{
                 height: "18px",
                 width: "18px",
                 marginTop: "20px",
-                fill: isLove ? "red" : "rgb(204, 204, 204)",
+                fill: product.isLiked ? "red" : "rgb(204, 204, 204)",
               }}
             />
           </Button>

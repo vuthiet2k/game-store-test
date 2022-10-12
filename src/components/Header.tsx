@@ -31,11 +31,7 @@ function Header() {
   return (
     <AppBar sx={{ backgroundColor: "#000", height: "62px" }}>
       <Toolbar sx={{ justifyContent: "space-between" }}>
-<<<<<<< HEAD
         <Box sx={{ gap: "100px", display: "flex", alignItems: "center" }}>
-=======
-        <Box sx={{ gap: "100px", display: 'flex', alignItems: 'center' }}>
->>>>>>> 4f876c7dfc471ab834abd2e620e0a81fb3801560
           <Link to="/" style={{ textDecoration: "none" }}>
             <Button
               disableRipple
@@ -53,11 +49,7 @@ function Header() {
             </Button>
           </Link>
 
-<<<<<<< HEAD
           <Box>
-=======
-          <Box sx={{ height: "35px" }}>
->>>>>>> 4f876c7dfc471ab834abd2e620e0a81fb3801560
             <InputSearch
               placeholder="Search games..."
               value={search}

@@ -7,6 +7,18 @@ export const ProductContext = React.createContext<ProductContextType>(
   {} as ProductContextType
 );
 
+export const handlerLove = (
+  id: number,
+  allData: ProductType[],
+  setAllData: (newValue: ProductType[] | null) => void
+) => {
+  let elements = [...allData];
+  elements = elements.map((item) =>
+    item.id === id ? { ...item, isLiked: !allData[id].isLiked } : item
+  );
+  setAllData(elements);
+};
+
 type PropChildren = {
   children: React.ReactNode;
 };

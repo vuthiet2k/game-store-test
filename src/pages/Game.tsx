@@ -1,9 +1,9 @@
 import {
   Box,
-  CardActions,
+  Button,
   CardContent,
-  Collapse,
   Stack,
+  styled,
   Typography,
 } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,29 +11,41 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getData } from "../apis";
-import { ExpandMore } from "@mui/icons-material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
+import { ProductType } from "../@type/product";
+import iconAddToCart from "../assets/icon/addToCart.svg";
+import iconAdded from "../assets/icon/added.svg";
+import { ReactComponent as IconAddLove } from "../assets/icon/addLove.svg";
+import { handlerLove, ProductContext } from "../context/ProductContext";
+import { CartContext, handlerAddCart } from "../context/CartContext";
+import { Toaster } from "react-hot-toast";
 
 function Game() {
   let { productID } = useParams();
-
-  const [product, setProduct] = useState<any>({});
-  const [expanded, setExpanded] = useState(false);
+  const { cart, setCart } = useContext(CartContext);
+  const { allData, setAllData } = useContext(ProductContext);
+  const [product, setProduct] = useState<ProductType>(
+    allData[Number(productID)]
+  );
+  const [more, setMore] = useState(true);
   const handleExpandClick = () => {
-    setExpanded(!expanded);
+    setMore(!more);
   };
-  useEffect(() => {
-    getData(`products/${productID}`).then((res) => {
-      setProduct(res?.data);
-    });
-  }, [productID]);
-
+  const handlerAddCartGame = () => {
+    setProduct({ ...product, inCart: true });
+    handlerAddCart(product.id, allData, setAllData, cart, setCart);
+  };
+  const handlerLoveGame = () => {
+    setProduct({ ...product, isLiked: !product.isLiked });
+    handlerLove(product.id, allData, setAllData);
+  };
   return (
     <Box pt={10} pb={"280px"} sx={{ width: "100%", backgroundColor: "#000" }}>
+      <Toaster position="top-right" reverseOrder={false} />
       <Box sx={{ padding: "30px 50px" }}>
         <Stack
           direction={"row"}
@@ -90,7 +102,7 @@ function Game() {
               <SwiperSlide>
                 <Box
                   sx={{
-                    backgroundImage: `url(${product?.avatar})`,
+                    backgroundImage: `url(${product.cover})`,
                     backgroundSize: "cover",
                     width: "100%",
                     height: "120vh",
@@ -103,7 +115,7 @@ function Game() {
               <SwiperSlide>
                 <Box
                   sx={{
-                    backgroundImage: `url(${product?.avatar1})`,
+                    backgroundImage: `url(${product.footage[1]})`,
                     backgroundSize: "cover",
                     width: "100%",
                     height: "120vh",
@@ -116,7 +128,7 @@ function Game() {
               <SwiperSlide>
                 <Box
                   sx={{
-                    backgroundImage: `url(${product?.avatar})`,
+                    backgroundImage: `url(${product.footage[2]})`,
                     backgroundSize: "cover",
                     width: "100%",
                     height: "120vh",
@@ -128,66 +140,186 @@ function Game() {
               </SwiperSlide>
             </Swiper>
           </Box>
-          <Box sx={{ width: "440px", padding: "30px 70px 30px 34px" }}>
-            <CardContent>
-              <Typography variant="h2" color="#fff">
+          <Stack
+            sx={{
+              width: "440px",
+            }}
+          >
+            <CardContent
+              sx={{
+                overflow: "scroll",
+                height: "350px",
+                padding: "30px 70px 30px 34px",
+                backgroundColor: "#1a1a1a",
+                backgroundImage: "linear-gradient(180deg,transparent,#1a1a1a)",
+                borderTopRightRadius: "16px",
+                borderTopLeftRadius: "16px",
+                "::-webkit-scrollbar": { display: "none" },
+              }}
+            >
+              <Typography
+                variant="h2"
+                color="#fff"
+                sx={{ mb: "15px", fontFamily: "fantasy", fontSize: "30px" }}
+              >
                 About
               </Typography>
-              <Typography paragraph color="#fff">
-                {product?.about}
-              </Typography>
+              <H3gametext>{product.desc}</H3gametext>
             </CardContent>
-            <CardActions disableSpacing>
-              <ExpandMore
-                // expand={expanded}
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
-                aria-label="show more"
-                sx={{ color: "#fff" }}
-              >
-                <ExpandMoreIcon />
-              </ExpandMore>
-            </CardActions>
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
-              <CardContent>
-                <Typography paragraph color="#fff">
-                  Method:
+            <Box
+              sx={{
+                backgroundColor: "#262626",
+                padding: "30px 70px 30px 34px",
+                borderBottomRightRadius: "16px",
+                borderBottomLeftRadius: "16px",
+              }}
+            >
+              {more ? (
+                <Button
+                  disableRipple
+                  sx={{
+                    ml: "90%",
+                    color: "#ccc",
+                    fontSize: "18px",
+                    textTransform: "none",
+                    fontWeight: "600",
+                    fontFamily: "sans-serif",
+                  }}
+                  onClick={handleExpandClick}
+                >
+                  More <ExpandMoreIcon />
+                </Button>
+              ) : (
+                <>
+                  <Typography
+                    component={"a"}
+                    href={product.link}
+                    target="_blank"
+                    sx={{
+                      color: "#fff",
+                      fontSize: "18px",
+                      fontWeight: "600",
+                      fontFamily: "sans-serif",
+                      textDecoration: "none",
+                    }}
+                  >
+                    {product.name} Website
+                  </Typography>
+                  <H3gametextmore>Released: {product.release}</H3gametextmore>
+                  <H3gametextmore>
+                    Platforms: {product.platforms}
+                  </H3gametextmore>
+                  <H3gametextmore>Main Genre: {product.genre}</H3gametextmore>
+                  <H3gametextmore>
+                    Developers: {product.developers}
+                  </H3gametextmore>
+                  <H3gametextmore>
+                    Publishers: {product.publishers}
+                  </H3gametextmore>
+                  <Button
+                    disableRipple
+                    sx={{
+                      ml: "90%",
+                      color: "#ccc",
+                      textTransform: "none",
+                      fontSize: "18px",
+                      fontWeight: "600",
+                      fontFamily: "sans-serif",
+                    }}
+                    onClick={handleExpandClick}
+                  >
+                    Hide <ExpandLessIcon />
+                  </Button>
+                </>
+              )}
+            </Box>
+            <Box
+              sx={{
+                mt: "50px",
+                backgroundColor: "#1a1a1a",
+                borderRadius: "16px",
+                padding: "20px 30px",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              {product.inCart === true ? (
+                <Typography
+                  paragraph
+                  sx={{
+                    margin: "8px",
+                    color: "#90ee90",
+                    fontSize: "14px ",
+                    fontWeight: "700",
+                  }}
+                >
+                  Added
+                  <img
+                    src={iconAdded}
+                    alt="icon"
+                    style={{
+                      height: "14px",
+                      width: "14px",
+                      marginLeft: "6px",
+                    }}
+                  />
                 </Typography>
-                <Typography paragraph>
-                  Heat 1/2 cup of the broth in a pot until simmering, add
-                  saffron and set aside for 10 minutes.
-                </Typography>
-                <Typography paragraph color="#fff">
-                  Heat oil in a (14- to 16-inch) paella pan or a large, deep
-                  skillet over medium-high heat. Add chicken, shrimp and
-                  chorizo, and cook, stirring occasionally until lightly
-                  browned, 6 to 8 minutes. Transfer shrimp to a large plate and
-                  set aside, leaving chicken and chorizo in the pan. Add
-                  pimentón, bay leaves, garlic, tomatoes, onion, salt and
-                  pepper, and cook, stirring often until thickened and fragrant,
-                  about 10 minutes. Add saffron broth and remaining 4 1/2 cups
-                  chicken broth; bring to a boil.
-                </Typography>
-                <Typography paragraph color="#fff">
-                  Add rice and stir very gently to distribute. Top with
-                  artichokes and peppers, and cook without stirring, until most
-                  of the liquid is absorbed, 15 to 18 minutes. Reduce heat to
-                  medium-low, add reserved shrimp and mussels, tucking them down
-                  into the rice, and cook again without stirring, until mussels
-                  have opened and rice is just tender, 5 to 7 minutes more.
-                  (Discard any mussels that don&apos;t open.)
-                </Typography>
-                <Typography color="#fff">
-                  Set aside off of the heat to let rest for 10 minutes, and then
-                  serve.
-                </Typography>
-              </CardContent>
-            </Collapse>
-          </Box>
+              ) : (
+                <Button
+                  size="small"
+                  sx={{
+                    color: "rgb(153, 153, 153)",
+                    fontSize: "14px ",
+                    textTransform: "none",
+                    fontWeight: "700",
+                  }}
+                  onClick={handlerAddCartGame}
+                >
+                  Add to cart
+                  <img
+                    src={iconAddToCart}
+                    alt="icon"
+                    style={{
+                      height: "14px",
+                      width: "14px",
+                      marginLeft: "15px",
+                    }}
+                  />
+                </Button>
+              )}
+              <Button onClick={handlerLoveGame}>
+                <IconAddLove
+                  style={{
+                    height: "18px",
+                    width: "18px",
+                    marginTop: "20px",
+                    fill: product.isLiked ? "red" : "rgb(204, 204, 204)",
+                  }}
+                />
+              </Button>
+            </Box>
+          </Stack>
         </Stack>
       </Box>
     </Box>
   );
 }
+
+const H3gametext = styled("h3")({
+  color: "#ccc",
+  fontFamily: "cursive",
+  fontSize: "15px",
+  lineHeight: "1.65",
+  wordSpacing: "2px",
+  fontWeight: "100",
+});
+const H3gametextmore = styled("h3")({
+  color: "#999",
+  fontFamily: "cursive",
+  fontSize: "16px",
+  lineHeight: "1.65",
+  wordSpacing: "2px",
+  fontWeight: "300",
+});
 
 export default Game;
