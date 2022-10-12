@@ -1,27 +1,26 @@
 import { Box, Button, Paper, Typography } from "@mui/material";
-import { deleteData } from "../apis";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
-import Header from "../components/Header";
 import { CartType } from "../@type/cart";
 import { Stack } from "@mui/system";
+import AnimatedCart from "../animations/AnimatedCart";
 
 function Cart() {
+  const { cart, setCart } = useContext(CartContext);
   const handlerDelete = (id: number) => {
-    deleteData(`cart/${id}`);
     setCart(cart.filter((item) => item.id !== id));
   };
-  const { cart, setCart } = useContext(CartContext);
   return (
-    <Box
-      p={20}
-      sx={{
-        backgroundColor: "#000",
-      }}
-    >
-      <Stack sx={{ alignItems: "center" }}>
-        {cart && cart.length > 0
-          ? cart?.map((game: CartType) => {
+    <AnimatedCart>
+      <Box
+        p={20}
+        sx={{
+          backgroundColor: "#000",
+        }}
+      >
+        <Stack sx={{ alignItems: "center" }}>
+          {cart && cart.length > 0 ? (
+            cart?.map((game: CartType) => {
               return (
                 <Paper
                   key={game.id}
@@ -56,9 +55,17 @@ function Cart() {
                 </Paper>
               );
             })
-          : "No games added"}
-      </Stack>
-    </Box>
+          ) : (
+            <Typography
+              paragraph
+              sx={{ color: "#999", margin: "0", fontSize: "24px" }}
+            >
+              "No games added"
+            </Typography>
+          )}
+        </Stack>
+      </Box>
+    </AnimatedCart>
   );
 }
 

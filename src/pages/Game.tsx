@@ -148,7 +148,7 @@ function Game() {
             <CardContent
               sx={{
                 overflow: "scroll",
-                height: "350px",
+                height: "375px",
                 padding: "30px 70px 30px 34px",
                 backgroundColor: "#1a1a1a",
                 backgroundImage: "linear-gradient(180deg,transparent,#1a1a1a)",
@@ -238,18 +238,31 @@ function Game() {
                 mt: "50px",
                 backgroundColor: "#1a1a1a",
                 borderRadius: "16px",
-                padding: "20px 30px",
+                padding: "15px 30px",
                 display: "flex",
                 justifyContent: "space-between",
               }}
             >
+              <Button
+                sx={{ color: "rgb(153, 153, 153)", fontSize: "20px", fontWeight: "700", gap: "15px" }}
+                onClick={handlerLoveGame}
+              >
+                ${product.price}
+                <IconAddLove
+                  style={{
+                    height: "22px",
+                    width: "22px",
+                    fill: product.isLiked ? "red" : "rgb(204, 204, 204)",
+                  }}
+                />
+              </Button>
               {product.inCart === true ? (
                 <Typography
                   paragraph
                   sx={{
                     margin: "8px",
                     color: "#90ee90",
-                    fontSize: "14px ",
+                    fontSize: "16px ",
                     fontWeight: "700",
                   }}
                 >
@@ -287,16 +300,6 @@ function Game() {
                   />
                 </Button>
               )}
-              <Button onClick={handlerLoveGame}>
-                <IconAddLove
-                  style={{
-                    height: "18px",
-                    width: "18px",
-                    marginTop: "20px",
-                    fill: product.isLiked ? "red" : "rgb(204, 204, 204)",
-                  }}
-                />
-              </Button>
             </Box>
           </Stack>
         </Stack>
