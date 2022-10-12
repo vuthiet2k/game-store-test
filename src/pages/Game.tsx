@@ -31,6 +31,9 @@ function Game() {
   const [product, setProduct] = useState<ProductType>(
     allData[Number(productID)]
   );
+  useEffect(() => {
+    allData[Number(productID)];
+  }, [product]);
   const [more, setMore] = useState(true);
   const handleExpandClick = () => {
     setMore(!more);
@@ -244,7 +247,12 @@ function Game() {
               }}
             >
               <Button
-                sx={{ color: "rgb(153, 153, 153)", fontSize: "20px", fontWeight: "700", gap: "15px" }}
+                sx={{
+                  color: "rgb(153, 153, 153)",
+                  fontSize: "20px",
+                  fontWeight: "700",
+                  gap: "15px",
+                }}
                 onClick={handlerLoveGame}
               >
                 ${product.price}
