@@ -102,10 +102,11 @@ function Game() {
               className="mySwiper"
               style={{ borderRadius: "20px" }}
             >
-              <SwiperSlide>
+              {product.footage.length>0? product.footage.map((item) => { return (
+                <SwiperSlide>
                 <Box
                   sx={{
-                    backgroundImage: `url(${product.cover})`,
+                    backgroundImage: `url(${item})`,
                     backgroundSize: "cover",
                     width: "100%",
                     height: "120vh",
@@ -115,32 +116,7 @@ function Game() {
                   }}
                 />
               </SwiperSlide>
-              <SwiperSlide>
-                <Box
-                  sx={{
-                    backgroundImage: `url(${product.footage[1]})`,
-                    backgroundSize: "cover",
-                    width: "100%",
-                    height: "120vh",
-                    borderRadius: "20px",
-                    backgroundRepeat: "round",
-                    maxHeight: "550px",
-                  }}
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Box
-                  sx={{
-                    backgroundImage: `url(${product.footage[2]})`,
-                    backgroundSize: "cover",
-                    width: "100%",
-                    height: "120vh",
-                    borderRadius: "20px",
-                    backgroundRepeat: "round",
-                    maxHeight: "550px",
-                  }}
-                />
-              </SwiperSlide>
+              )}) : ""}
             </Swiper>
           </Box>
           <Stack
