@@ -30,16 +30,16 @@ const Product = ({
   const [added, setAdded] = useState<boolean>(isadded);
   const { cart, setCart } = useContext(CartContext);
   const { allData, setAllData } = useContext(ProductContext);
-  // const [product, setProduct] = useState<ProductType>(allData[id]);
+  const [product, setProduct] = useState<ProductType>(allData[id]);
   const handlerAddCartProduct = () => {
     setAdded(true);
-    // setProduct({ ...product, inCart: true });
+    setProduct({ ...product, inCart: true });
     handlerAddCart(id, allData, setAllData, cart, setCart);
   };
   const handlerLoveProduct = () => {
     setIsLove(!isLove);
     handlerLove(id, allData, setAllData);
-    // setProduct({ ...product, isLiked: !product.isLiked });
+    setProduct({ ...product, isLiked: !product.isLiked });
   };
   useEffect(() => {
     setIsLove(love);
@@ -84,7 +84,7 @@ const Product = ({
               color: "#90ee90",
               fontSize: "14px ",
               fontWeight: "700",
-              display: added ? "block" : "none",
+              display: added&&product.inCart ? "block" : "none",
             }}
           >
             Added
@@ -137,7 +137,7 @@ const Product = ({
                 height: "18px",
                 width: "18px",
                 marginTop: "20px",
-                fill: isLove ? "red" : "rgb(204, 204, 204)",
+                fill: isLove&&product.isLiked ? "red" : "rgb(204, 204, 204)",
               }}
             />
           </Button>
