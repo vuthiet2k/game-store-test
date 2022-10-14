@@ -4,10 +4,17 @@ import { CartContext } from "../context/CartContext";
 import { CartType } from "../@type/cart";
 import { Stack } from "@mui/system";
 import AnimatedCart from "../animations/AnimatedCart";
+import { ProductContext } from "../context/ProductContext";
 
 function Cart() {
   const { cart, setCart } = useContext(CartContext);
+  const {allData, setAllData} = useContext(ProductContext)
   const handlerDelete = (id: number) => {
+    let elements = [...allData];
+    elements = elements.map((item) =>
+      item.id === id ? { ...item, inCart: false } : item
+    );
+    setAllData(elements);
     setCart(cart.filter((item) => item.id !== id));
   };
   return (

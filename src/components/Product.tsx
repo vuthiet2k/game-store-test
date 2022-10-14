@@ -26,27 +26,30 @@ const Product = ({
   love,
   isadded,
 }: ProductTypeCart) => {
-  const [isLove, setIsLove] = useState<boolean>(love);
-  const [added, setAdded] = useState<boolean>(isadded);
+  // const [isLove, setIsLove] = useState<boolean>(love);
+  // const [added, setAdded] = useState<boolean>(isadded);
   const { cart, setCart } = useContext(CartContext);
   const { allData, setAllData } = useContext(ProductContext);
-  // const [product, setProduct] = useState<ProductType>(allData[id]);
+  const [product, setProduct] = useState<ProductType>(allData[id]);
   const handlerAddCartProduct = () => {
-    setAdded(true);
-    // setProduct({ ...product, inCart: true });
+    // setAdded(true);
+    setProduct({ ...product, inCart: true });
     handlerAddCart(id, allData, setAllData, cart, setCart);
   };
   const handlerLoveProduct = () => {
-    setIsLove(!isLove);
+    // setIsLove(!isLove);
+    setProduct({ ...product, isLiked: !product.isLiked });
     handlerLove(id, allData, setAllData);
-    // setProduct({ ...product, isLiked: !product.isLiked });
   };
   useEffect(() => {
-    setIsLove(love);
-  }, [love]);
-  useEffect(() => {
-    setAdded(isadded);
-  }, [isadded]);
+    setProduct(allData[id])
+  }, [id])
+  // useEffect(() => {
+  //   setIsLove(love);
+  // }, [love]);
+  // useEffect(() => {
+  //   setAdded(isadded);
+  // }, [isadded]);
   return (
     <>
       <Toaster position="top-right" reverseOrder={false} />
@@ -84,7 +87,7 @@ const Product = ({
               color: "#90ee90",
               fontSize: "14px ",
               fontWeight: "700",
-              display: added ? "block" : "none",
+              display: product.inCart ? "block" : "none",
             }}
           >
             Added
@@ -101,7 +104,7 @@ const Product = ({
               fontSize: "14px ",
               textTransform: "none",
               fontWeight: "700",
-              display: added ? "none" : "block",
+              display: product.inCart ? "none" : "block",
             }}
             onClick={handlerAddCartProduct}
           >
@@ -137,7 +140,7 @@ const Product = ({
                 height: "18px",
                 width: "18px",
                 marginTop: "20px",
-                fill: isLove ? "red" : "rgb(204, 204, 204)",
+                fill: product.isLiked ? "red" : "rgb(204, 204, 204)",
               }}
             />
           </Button>
@@ -147,4 +150,4 @@ const Product = ({
   );
 };
 
-export default memo(Product);
+export default Product;
