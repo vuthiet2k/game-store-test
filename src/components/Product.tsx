@@ -17,39 +17,21 @@ import { CartContext, handlerAddCart } from "../context/CartContext";
 import { handlerLove, ProductContext } from "../context/ProductContext";
 import { Toaster } from "react-hot-toast";
 
-const Product = ({
-  id,
-  to,
-  src,
-  name,
-  money,
-  love,
-  isadded,
-}: ProductTypeCart) => {
-  // const [isLove, setIsLove] = useState<boolean>(love);
-  // const [added, setAdded] = useState<boolean>(isadded);
+const Product = ({ id, to }: ProductTypeCart) => {
   const { cart, setCart } = useContext(CartContext);
   const { allData, setAllData } = useContext(ProductContext);
   const [product, setProduct] = useState<ProductType>(allData[id]);
   const handlerAddCartProduct = () => {
-    // setAdded(true);
     setProduct({ ...product, inCart: true });
     handlerAddCart(id, allData, setAllData, cart, setCart);
   };
   const handlerLoveProduct = () => {
-    // setIsLove(!isLove);
     setProduct({ ...product, isLiked: !product.isLiked });
     handlerLove(id, allData, setAllData);
   };
   useEffect(() => {
-    setProduct(allData[id])
-  }, [id])
-  // useEffect(() => {
-  //   setIsLove(love);
-  // }, [love]);
-  // useEffect(() => {
-  //   setAdded(isadded);
-  // }, [isadded]);
+    setProduct(allData[id]);
+  }, [id]);
   return (
     <>
       <Toaster position="top-right" reverseOrder={false} />
@@ -71,7 +53,7 @@ const Product = ({
         <Link to={to}>
           <CardMedia
             component="img"
-            image={src}
+            image={product.cover}
             alt="green iguana"
             sx={{
               minHeight: "160px",
@@ -119,7 +101,7 @@ const Product = ({
             variant="h6"
             sx={{ color: "#fff", fontSize: "14px", fontWeight: "700" }}
           >
-            ${money}
+            ${product.price}
           </Typography>
         </CardActions>
         <CardContent sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -132,7 +114,7 @@ const Product = ({
               fontFamily: "fantasy",
             }}
           >
-            {name}
+            {product.name}
           </Link>
           <Button onClick={handlerLoveProduct}>
             <IconAddLove
@@ -150,4 +132,4 @@ const Product = ({
   );
 };
 
-export default Product;
+export default memo(Product);

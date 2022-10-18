@@ -7,7 +7,6 @@ import { ProductContext } from "../context/ProductContext";
 import { CartContext } from "../context/CartContext";
 
 export const Topic = () => {
-  const { cart } = useContext(CartContext);
   const [layout, setLayout] = useState<number>(3);
   const { allData, setDataUI, dataUI, filter, setFilter } =
     useContext(ProductContext);
@@ -143,7 +142,6 @@ export const Topic = () => {
                 height: "48px",
                 cursor: "pointer",
                 transition: "all .2s",
-                // fill: "#fff",
               }}
             />
           </Button>
@@ -168,7 +166,6 @@ export const Topic = () => {
                 height: "48px",
                 cursor: "pointer",
                 transition: "all .2s",
-                // fill: "#fff",
               }}
             />
           </Button>
@@ -201,17 +198,6 @@ export const Topic = () => {
                   <Product
                     id={product.id}
                     to={`/store/${product.id}`}
-                    name={product.name}
-                    src={product.cover}
-                    money={product.price}
-                    love={product.isLiked}
-                    isadded={
-                      cart.find((item) => {
-                        return item.id === product.id;
-                      })
-                        ? true
-                        : false
-                    }
                   />
                 </Grid>
               );

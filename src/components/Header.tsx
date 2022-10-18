@@ -5,7 +5,6 @@ import { AppBar, Button, styled, Toolbar } from "@mui/material";
 import UserCart from "./UserCart";
 import iconHeadHome from "../assets/icon/headgame.svg";
 import SearchHead from "../assets/icon/headersearch.svg";
-import { getData } from "../apis";
 import { ProductContext } from "../context/ProductContext";
 import React from "react";
 
@@ -26,6 +25,11 @@ function Header() {
     );
     setSearch("");
     navigate("/store");
+  };
+  const handlerKeyDown = (e: KeyboardEvent) => {
+    if (e.code === "Enter") {
+      handlerClickSearch();
+    }
   };
 
   return (
@@ -54,6 +58,7 @@ function Header() {
               placeholder="Search games..."
               value={search}
               onChange={(e) => handlerChangeSearch(e)}
+              onKeyDown={() => handlerKeyDown}
             />
             <Button type="submit" onClick={handlerClickSearch}>
               <IconRoute src={SearchHead} alt="icon" />

@@ -12,12 +12,5 @@ export interface CartType {
   export type ProductType = {
     id: number;
     to: string;
-    src: string;
-    name: string;
-    money: string;
-    love: boolean;
-    isadded: boolean;
-    about?: string;
-    ratting?: boolean;
   };
   
