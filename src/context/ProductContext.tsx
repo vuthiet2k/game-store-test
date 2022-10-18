@@ -10,7 +10,7 @@ export const ProductContext = React.createContext<ProductContextType>(
 export const handlerLove = (
   id: number,
   allData: ProductType[],
-  setAllData: (newValue: ProductType[] | null) => void
+  setAllData: (newValue: ProductType[] | null) => void,
 ) => {
   let elements = [...allData];
   elements = elements.map((item) =>

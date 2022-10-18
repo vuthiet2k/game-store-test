@@ -24,13 +24,12 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { Stack } from "@mui/system";
 import { motion } from "framer-motion";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 function Home() {
   let navigate = useNavigate();
-  if (!localStorage.getItem("USER")) {
-    localStorage.setItem("USER", JSON.stringify(""));
-  }
-  let user = JSON.parse(localStorage.getItem("USER") || "");
+  const {users} = useContext(CartContext)
   return (
     <Box>
       <Box
@@ -103,7 +102,7 @@ function Home() {
                 <H3Route>Browse Store</H3Route>
               </Button>
             </Box>
-            {user ? <UserCart /> : <></>}
+            {users ? <UserCart /> : <></>}
           </Toolbar>
         </AppBar>
       </motion.div>

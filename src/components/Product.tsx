@@ -7,20 +7,22 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  styled,
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { ProductType as ProductTypeCart } from "../@type/cart";
 import { ProductType } from "../@type/product";
-import { memo, useContext, useEffect, useState } from "react";
 import { CartContext, handlerAddCart } from "../context/CartContext";
 import { handlerLove, ProductContext } from "../context/ProductContext";
 import { Toaster } from "react-hot-toast";
+import React from "react";
 
 const Product = ({ id, to }: ProductTypeCart) => {
-  const { cart, setCart } = useContext(CartContext);
-  const { allData, setAllData } = useContext(ProductContext);
-  const [product, setProduct] = useState<ProductType>(allData[id]);
+  const { cart, setCart } = React.useContext(CartContext);
+  const { allData, setAllData, filter, setDataUI, dataUI } =
+    React.useContext(ProductContext);
+  const [product, setProduct] = React.useState<ProductType>(allData[id]);
   const handlerAddCartProduct = () => {
     setProduct({ ...product, inCart: true });
     handlerAddCart(id, allData, setAllData, cart, setCart);
@@ -28,8 +30,11 @@ const Product = ({ id, to }: ProductTypeCart) => {
   const handlerLoveProduct = () => {
     setProduct({ ...product, isLiked: !product.isLiked });
     handlerLove(id, allData, setAllData);
+    if (filter === "Wishlist") {
+      setDataUI(dataUI.filter((item) => item.id !== id));
+    }
   };
-  useEffect(() => {
+  React.useEffect(() => {
     setProduct(allData[id]);
   }, [id]);
   return (
@@ -79,7 +84,9 @@ const Product = ({ id, to }: ProductTypeCart) => {
               style={{ height: "14px", width: "14px", marginLeft: "6px" }}
             />
           </Typography>
-          <Button
+          <StyledButton
+            disableRipple
+            disableElevation
             size="small"
             sx={{
               color: "rgb(153, 153, 153)",
@@ -96,7 +103,7 @@ const Product = ({ id, to }: ProductTypeCart) => {
               alt="icon"
               style={{ height: "14px", width: "14px", marginLeft: "15px" }}
             />
-          </Button>
+          </StyledButton>
           <Typography
             variant="h6"
             sx={{ color: "#fff", fontSize: "14px", fontWeight: "700" }}
@@ -116,7 +123,7 @@ const Product = ({ id, to }: ProductTypeCart) => {
           >
             {product.name}
           </Link>
-          <Button onClick={handlerLoveProduct}>
+          <StyledButton disableRipple onClick={handlerLoveProduct}>
             <IconAddLove
               style={{
                 height: "18px",
@@ -125,11 +132,19 @@ const Product = ({ id, to }: ProductTypeCart) => {
                 fill: product.isLiked ? "red" : "rgb(204, 204, 204)",
               }}
             />
-          </Button>
+          </StyledButton>
         </CardContent>
       </Card>
     </>
   );
 };
 
-export default memo(Product);
+export default React.memo(Product);
+
+const StyledButton = styled(Button)`
+  &&.MuiButton-root {
+    &:hover {
+      background: none;
+    }
+  }
+`;

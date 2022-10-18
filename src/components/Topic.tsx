@@ -4,7 +4,6 @@ import Product from "./Product";
 import { ReactComponent as Layout4 } from "../assets/icon/layoutTopic.svg";
 import { ReactComponent as Layout1 } from "../assets/icon/layoutTopic1.svg";
 import { ProductContext } from "../context/ProductContext";
-import { CartContext } from "../context/CartContext";
 
 export const Topic = () => {
   const [layout, setLayout] = useState<number>(3);
@@ -14,7 +13,6 @@ export const Topic = () => {
     setDataUI(allData);
     setFilter("None");
   };
-  
   return (
     <Box pb={"280px"} sx={{ display: "block", flex: "1" }}>
       <Box>
@@ -194,10 +192,7 @@ export const Topic = () => {
                     justifyContent: "center",
                   }}
                 >
-                  <Product
-                    id={product.id}
-                    to={`/store/${product.id}`}
-                  />
+                  <Product id={product.id} to={`/store/${product.id}`} />
                 </Grid>
               );
             })

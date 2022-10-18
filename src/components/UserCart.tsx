@@ -7,9 +7,8 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 function UserCart() {
-  const { cart } = useContext(CartContext);
+  const { cart, users } = useContext(CartContext);
   let navigate = useNavigate();
-  let user = JSON.parse(localStorage.getItem("USER") || "");
 
   return (
     <Box sx={{ display: { xs: "none", md: "block" } }}>
@@ -21,7 +20,7 @@ function UserCart() {
         }}
       >
         <IconRoute alt="icon" src={iconHeadUser} />
-        <H3Route>{user ? user.account : ""}</H3Route>
+        <H3Route>{users ? users : ""}</H3Route>
       </Button>
       <Button
         disableRipple

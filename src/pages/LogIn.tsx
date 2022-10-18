@@ -1,5 +1,4 @@
 import Contact from "../components/Contact/Contact";
-import LogoLogin from "../assets/images/login.png";
 import iconIntagram from "../assets/icon/instagram.png";
 import {
   Box,
@@ -7,15 +6,17 @@ import {
   FormControl,
   Input,
   InputLabel,
+  styled,
   Typography,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { Email } from "@mui/icons-material";
+import { useContext, useState } from "react";
 import { postData } from "../apis";
+import { CartContext } from "../context/CartContext";
 
 function LogIn() {
   let navigate = useNavigate();
+  const { setUsers } = useContext(CartContext);
   const [account, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
@@ -27,20 +28,13 @@ function LogIn() {
     // eslint-disable-next-line no-const-assign
     setPass(e.target.value);
   };
-  // useEffect(() => {
-  //   postData('user', {
-  //     account: account,
-  //     password: pass
-  //   })
-  // }, [account])
   const handlerSubmitLogin = () => {
+    setUsers(account);
     postData("user", {
       password: pass,
       account: account,
     })
       .then((res) => {
-        localStorage.removeItem("USER");
-        localStorage.setItem("USER", JSON.stringify(res?.data));
         return navigate("/");
       })
       .catch((err) => {
@@ -48,9 +42,7 @@ function LogIn() {
       });
   };
   return (
-    <Box sx={{ backgroundColor: "#000", pt: 10 }}>
-      {/* <Box> */}
-      {/* <img src={LogoLogin} alt="logo" /> */}
+    <Box pt={15} sx={{ backgroundColor: "#000" }}>
       <Box
         sx={{
           margin: "auto",
@@ -102,18 +94,17 @@ function LogIn() {
                 onChange={handlerPass}
               />
             </FormControl>
-            <Button
+            <StyledButton
               sx={{ backgroundColor: "red", color: "#fff", margin: "30px 0" }}
               onClick={handlerSubmitLogin}
             >
               Đăng nhập
-            </Button>
-            {/* <Link to={"/"}></Link> */}
+            </StyledButton>
           </form>
           <Typography align="center" variant="subtitle1" sx={{ color: "#fff" }}>
             --- Hoặc ---
           </Typography>
-          <Button
+          <StyledButton
             href="#"
             sx={{ gap: "10px", backgroundColor: "red", width: "250px" }}
           >
@@ -133,7 +124,7 @@ function LogIn() {
             >
               Đăng nhập bằng Instagram
             </Typography>
-          </Button>
+          </StyledButton>
           <Typography paragraph align="center" sx={{ color: "#fff" }}>
             Quên mật khẩu?
           </Typography>
@@ -161,16 +152,21 @@ function LogIn() {
             Bạn chưa có tài khoản ư?
           </Typography>
           <Link to={"/register"} style={{ textDecoration: "none" }}>
-            <Button sx={{ backgroundColor: "red", color: "#fff" }}>
+            <StyledButton sx={{ backgroundColor: "red", color: "#fff" }}>
               Đăng ký
-            </Button>
+            </StyledButton>
           </Link>
         </Box>
       </Box>
-      {/* </Box> */}
       <Contact />
     </Box>
   );
 }
 
 export default LogIn;
+
+const StyledButton = styled(Button)({
+  ":hover": {
+    backgroundColor: "red",
+  },
+});

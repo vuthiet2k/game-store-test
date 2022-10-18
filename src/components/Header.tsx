@@ -6,12 +6,13 @@ import UserCart from "./UserCart";
 import iconHeadHome from "../assets/icon/headgame.svg";
 import SearchHead from "../assets/icon/headersearch.svg";
 import { ProductContext } from "../context/ProductContext";
+import { CartContext } from "../context/CartContext";
 import React from "react";
 
 function Header() {
-  let user = JSON.parse(localStorage.getItem("USER") || "");
   let navigate = useNavigate();
-  const { allData, setDataUI, setFilter } = useContext(ProductContext);
+  const {users} = React.useContext(CartContext);
+  const { allData, setDataUI, setFilter } = React.useContext(ProductContext);
   const [search, setSearch] = useState("");
   const handlerChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -65,7 +66,7 @@ function Header() {
             </Button>
           </Box>
         </Box>
-        {user ? <UserCart /> : ""}
+        {users ? <UserCart /> : ""}
       </Toolbar>
     </AppBar>
   );
