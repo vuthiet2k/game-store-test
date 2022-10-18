@@ -1,5 +1,5 @@
 import iconHeadHome from "../assets/icon/headgame.svg";
-import Contact from "./Contact/Contact";
+import Contact from "./Contact";
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import React from "react";

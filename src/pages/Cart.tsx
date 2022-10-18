@@ -1,4 +1,4 @@
-import { Box, Button, Paper, Typography } from "@mui/material";
+import { Box, Button, Paper, styled, Typography } from "@mui/material";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { CartType } from "../@type/cart";
@@ -46,7 +46,8 @@ function Cart() {
                   }}
                 >
                   {game.name}
-                  <Button
+                  <StyledButton
+                  disableRipple
                     type="submit"
                     sx={{ color: "#fff", gap: "50px" }}
                     onClick={() => handlerDelete(game.id)}
@@ -58,7 +59,7 @@ function Cart() {
                       ${game.money}
                     </Typography>
                     X
-                  </Button>
+                  </StyledButton>
                 </Paper>
               );
             })
@@ -77,3 +78,11 @@ function Cart() {
 }
 
 export default Cart;
+
+const StyledButton = styled(Button)`
+  &&.MuiButton-root {
+    &:hover {
+      background: none;
+    }
+  }
+`;

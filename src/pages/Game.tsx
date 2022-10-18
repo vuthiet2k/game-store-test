@@ -102,21 +102,25 @@ function Game() {
               className="mySwiper"
               style={{ borderRadius: "20px" }}
             >
-              {product.footage.length>0? product.footage.map((item) => { return (
-                <SwiperSlide>
-                <Box
-                  sx={{
-                    backgroundImage: `url(${item})`,
-                    backgroundSize: "cover",
-                    width: "100%",
-                    height: "120vh",
-                    borderRadius: "20px",
-                    backgroundRepeat: "round",
-                    maxHeight: "550px",
-                  }}
-                />
-              </SwiperSlide>
-              )}) : ""}
+              {product.footage.length > 0
+                ? product.footage.map((item) => {
+                    return (
+                      <SwiperSlide>
+                        <Box
+                          sx={{
+                            backgroundImage: `url(${item})`,
+                            backgroundSize: "cover",
+                            width: "100%",
+                            height: "120vh",
+                            borderRadius: "20px",
+                            backgroundRepeat: "round",
+                            maxHeight: "550px",
+                          }}
+                        />
+                      </SwiperSlide>
+                    );
+                  })
+                : ""}
             </Swiper>
           </Box>
           <Stack
@@ -154,7 +158,7 @@ function Game() {
               }}
             >
               {more ? (
-                <Button
+                <StyledButton
                   disableRipple
                   sx={{
                     ml: "90%",
@@ -167,7 +171,7 @@ function Game() {
                   onClick={handleExpandClick}
                 >
                   More <ExpandMoreIcon />
-                </Button>
+                </StyledButton>
               ) : (
                 <>
                   <Typography
@@ -195,7 +199,7 @@ function Game() {
                   <H3gametextmore>
                     Publishers: {product.publishers}
                   </H3gametextmore>
-                  <Button
+                  <StyledButton
                     disableRipple
                     sx={{
                       ml: "90%",
@@ -208,7 +212,7 @@ function Game() {
                     onClick={handleExpandClick}
                   >
                     Hide <ExpandLessIcon />
-                  </Button>
+                  </StyledButton>
                 </>
               )}
             </Box>
@@ -222,7 +226,8 @@ function Game() {
                 justifyContent: "space-between",
               }}
             >
-              <Button
+              <StyledButton
+                disableRipple
                 sx={{
                   color: "rgb(153, 153, 153)",
                   fontSize: "20px",
@@ -239,7 +244,7 @@ function Game() {
                     fill: product.isLiked ? "red" : "rgb(204, 204, 204)",
                   }}
                 />
-              </Button>
+              </StyledButton>
               {product.inCart === true ? (
                 <Typography
                   paragraph
@@ -262,7 +267,8 @@ function Game() {
                   />
                 </Typography>
               ) : (
-                <Button
+                <StyledButton
+                  disableRipple
                   size="small"
                   sx={{
                     color: "rgb(153, 153, 153)",
@@ -282,7 +288,7 @@ function Game() {
                       marginLeft: "15px",
                     }}
                   />
-                </Button>
+                </StyledButton>
               )}
             </Box>
           </Stack>
@@ -310,3 +316,11 @@ const H3gametextmore = styled("h3")({
 });
 
 export default Game;
+
+const StyledButton = styled(Button)`
+  &&.MuiButton-root {
+    &:hover {
+      background: none;
+    }
+  }
+`;

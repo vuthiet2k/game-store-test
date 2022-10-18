@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Game from "./pages/Game";
 import { Layout } from "./components/Layout";
 import LogIn from "./pages/LogIn";
-import Register from "./pages/register/Register";
+import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Store from "./pages/Store";
 import EroPage from "./pages/EroPage";

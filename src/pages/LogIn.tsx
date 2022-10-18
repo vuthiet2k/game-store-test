@@ -1,4 +1,4 @@
-import Contact from "../components/Contact/Contact";
+import Contact from "../components/Contact";
 import iconIntagram from "../assets/icon/instagram.png";
 import {
   Box,
@@ -139,6 +139,7 @@ function LogIn() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            gap: "10px",
           }}
         >
           <Typography
