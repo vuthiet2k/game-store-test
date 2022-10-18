@@ -20,14 +20,14 @@ function Header() {
     setFilter(search);
     setDataUI(
       allData.filter((item) => {
-        return item.name.includes(search) === true;
+        return item.name.toLowerCase().includes(search.toLowerCase()) === true;
       })
     );
     setSearch("");
     navigate("/store");
   };
-  const handlerKeyDown = (e: KeyboardEvent) => {
-    if (e.code === "Enter") {
+  const handlerKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
+    if (e.code === "Enter" && search) {
       handlerClickSearch();
     }
   };
@@ -58,7 +58,7 @@ function Header() {
               placeholder="Search games..."
               value={search}
               onChange={(e) => handlerChangeSearch(e)}
-              onKeyDown={() => handlerKeyDown}
+              onKeyDown={handlerKeyDown}
             />
             <Button type="submit" onClick={handlerClickSearch}>
               <IconRoute src={SearchHead} alt="icon" />

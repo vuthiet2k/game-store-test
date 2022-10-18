@@ -14,7 +14,6 @@ export const Topic = () => {
     setDataUI(allData);
     setFilter("None");
   };
-  console.log(dataUI);
   
   return (
     <Box pb={"280px"} sx={{ display: "block", flex: "1" }}>
